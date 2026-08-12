@@ -5,12 +5,24 @@
     <title>Snake Game Offline</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #fafafa; }
+        /* Center game and fix background */
+        body { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            background: #8fa08e; /* Match the green background from your screenshot */
+        }
+        /* Fix the overlapping text from your screenshot */
+        .gs-sub { line-height: 1.4; margin-bottom: 20px; }
+        .gs-menu h3 { margin-top: 0; }
     </style>
 </head>
 <body>
 
-    <div class="gs-board">
+    <!-- ADDED id="gsnake" HERE - THIS IS THE CRITICAL FIX -->
+    <div class="gs-board" id="gsnake">
         <canvas class="gs-canvas" width="820" height="525" aria-label="Snake game board"></canvas>
         <div class="gs-overlay">
             <div class="gs-menu">
@@ -21,7 +33,6 @@
                     <p data-gs-text="">Pick your settings and play.</p>
                 </div>
                 
-                <!-- Board Size -->
                 <div class="gs-group"><span>Board size</span>
                     <div class="gs-opts">
                         <button class="gs-opt" type="button" data-size="19x12">Small</button>
@@ -30,7 +41,6 @@
                     </div>
                 </div>
 
-                <!-- Speed Setting (REQUIRED FOR SCRIPT) -->
                 <div class="gs-group"><span>Speed</span>
                     <div class="gs-opts">
                         <button class="gs-opt" type="button" data-speed="180">Slow</button>
@@ -39,7 +49,6 @@
                     </div>
                 </div>
 
-                <!-- Walls Setting (REQUIRED FOR SCRIPT) -->
                 <div class="gs-group"><span>Walls</span>
                     <div class="gs-opts">
                         <button class="gs-opt gs-sel" type="button" data-walls="on">On</button>
@@ -52,7 +61,6 @@
         </div>
     </div>
 
-    <!-- Scripts MUST be in this order -->
     <script src="main.js"></script>
     <script src="google-snake.js"></script>
 </body>
