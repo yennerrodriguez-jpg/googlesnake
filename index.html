@@ -5,58 +5,95 @@
     <title>Snake Game Offline</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Center game and fix background */
         body { 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
             margin: 0; 
-            background: #8fa08e; /* Match the green background from your screenshot */
+            background: #8fa08e; 
+            font-family: sans-serif;
         }
+
+        /* HUD/Scoreboard Styling */
+        .gs-hud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.1);
+            padding: 10px 20px;
+            border-radius: 8px 8px 0 0;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .gs-apple::before { content: "🍎 "; }
+
         /* Fix the overlapping text from your screenshot */
-        .gs-sub { line-height: 1.4; margin-bottom: 20px; }
-        .gs-menu h3 { margin-top: 0; }
+        .gs-over-msg { 
+            height: 60px; /* Give it space so it doesn't overlap buttons */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .gs-over-msg p { margin: 2px 0; }
+        .gs-menu { padding: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- ADDED id="gsnake" HERE - THIS IS THE CRITICAL FIX -->
-    <div class="gs-board" id="gsnake">
-        <canvas class="gs-canvas" width="820" height="525" aria-label="Snake game board"></canvas>
-        <div class="gs-overlay">
-            <div class="gs-menu">
-                <h3>Snake</h3>
-                <p class="gs-sub">Eat the apples, grow longer, don’t bite yourself.</p>
-                <div class="gs-over-msg">
-                    <p data-gs-title="">Ready?</p>
-                    <p data-gs-text="">Pick your settings and play.</p>
-                </div>
-                
-                <div class="gs-group"><span>Board size</span>
-                    <div class="gs-opts">
-                        <button class="gs-opt" type="button" data-size="19x12">Small</button>
-                        <button class="gs-opt gs-sel" type="button" data-size="25x16">Medium</button>
-                        <button class="gs-opt" type="button" data-size="31x19">Large</button>
-                    </div>
-                </div>
+    <div class="gs-card" id="gsnake" style="width: 820px;">
+        
+        <!-- ADDED: The Scoreboard (HUD) -->
+        <div class="gs-hud">
+            <span class="gs-stat">
+                <span class="gs-apple" aria-hidden="true"></span>
+                <span data-gscore="">0</span>
+            </span>
+            <span class="gs-best">Best <span data-gbest="">0</span></span>
+        </div>
 
-                <div class="gs-group"><span>Speed</span>
-                    <div class="gs-opts">
-                        <button class="gs-opt" type="button" data-speed="180">Slow</button>
-                        <button class="gs-opt gs-sel" type="button" data-speed="140">Normal</button>
-                        <button class="gs-opt" type="button" data-speed="100">Fast</button>
+        <!-- The Game Board -->
+        <div class="gs-board" style="border-radius: 0 0 8px 8px; overflow: hidden;">
+            <canvas class="gs-canvas" width="820" height="525"></canvas>
+            
+            <div class="gs-overlay">
+                <div class="gs-menu">
+                    <h3>Snake</h3>
+                    <p class="gs-sub">Eat the apples, grow longer, don’t bite yourself.</p>
+                    
+                    <!-- Message Area (Score/Game Over appears here) -->
+                    <div class="gs-over-msg">
+                        <p data-gs-title="">Ready?</p>
+                        <p data-gs-text="">Pick your settings and play.</p>
                     </div>
-                </div>
-
-                <div class="gs-group"><span>Walls</span>
-                    <div class="gs-opts">
-                        <button class="gs-opt gs-sel" type="button" data-walls="on">On</button>
-                        <button class="gs-opt" type="button" data-walls="off">Off (wrap)</button>
+                    
+                    <div class="gs-group"><span>Board size</span>
+                        <div class="gs-opts">
+                            <button class="gs-opt" type="button" data-size="19x12">Small</button>
+                            <button class="gs-opt gs-sel" type="button" data-size="25x16">Medium</button>
+                            <button class="gs-opt" type="button" data-size="31x19">Large</button>
+                        </div>
                     </div>
-                </div>
 
-                <button class="gs-play" type="button" data-gplay="">▶ Play</button>
+                    <div class="gs-group"><span>Speed</span>
+                        <div class="gs-opts">
+                            <button class="gs-opt" type="button" data-speed="180">Slow</button>
+                            <button class="gs-opt gs-sel" type="button" data-speed="140">Normal</button>
+                            <button class="gs-opt" type="button" data-speed="100">Fast</button>
+                        </div>
+                    </div>
+
+                    <div class="gs-group"><span>Walls</span>
+                        <div class="gs-opts">
+                            <button class="gs-opt gs-sel" type="button" data-walls="on">On</button>
+                            <button class="gs-opt" type="button" data-walls="off">Off (wrap)</button>
+                        </div>
+                    </div>
+
+                    <button class="gs-play" type="button" data-gplay="">▶ Play</button>
+                </div>
             </div>
         </div>
     </div>
