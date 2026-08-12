@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Offline Snake Game</title>
-    <!-- Link to the CSS file you downloaded -->
+    <title>Snake Game Offline</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Center the game on the page */
         body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #fafafa; }
     </style>
 </head>
 <body>
 
-    <!-- The Game Board Structure -->
     <div class="gs-board">
         <canvas class="gs-canvas" width="820" height="525" aria-label="Snake game board"></canvas>
         <div class="gs-overlay">
@@ -23,6 +20,8 @@
                     <p data-gs-title="">Ready?</p>
                     <p data-gs-text="">Pick your settings and play.</p>
                 </div>
+                
+                <!-- Board Size -->
                 <div class="gs-group"><span>Board size</span>
                     <div class="gs-opts">
                         <button class="gs-opt" type="button" data-size="19x12">Small</button>
@@ -30,13 +29,30 @@
                         <button class="gs-opt" type="button" data-size="31x19">Large</button>
                     </div>
                 </div>
-                <!-- ... additional settings buttons ... -->
+
+                <!-- Speed Setting (REQUIRED FOR SCRIPT) -->
+                <div class="gs-group"><span>Speed</span>
+                    <div class="gs-opts">
+                        <button class="gs-opt" type="button" data-speed="180">Slow</button>
+                        <button class="gs-opt gs-sel" type="button" data-speed="140">Normal</button>
+                        <button class="gs-opt" type="button" data-speed="100">Fast</button>
+                    </div>
+                </div>
+
+                <!-- Walls Setting (REQUIRED FOR SCRIPT) -->
+                <div class="gs-group"><span>Walls</span>
+                    <div class="gs-opts">
+                        <button class="gs-opt gs-sel" type="button" data-walls="on">On</button>
+                        <button class="gs-opt" type="button" data-walls="off">Off (wrap)</button>
+                    </div>
+                </div>
+
                 <button class="gs-play" type="button" data-gplay="">▶ Play</button>
             </div>
         </div>
     </div>
 
-    <!-- Scripts at the end of the body -->
+    <!-- Scripts MUST be in this order -->
     <script src="main.js"></script>
     <script src="google-snake.js"></script>
 </body>
